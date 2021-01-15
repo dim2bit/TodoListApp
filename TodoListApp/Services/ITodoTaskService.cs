@@ -10,10 +10,10 @@ namespace TodoListApp.Services
 {
     public interface ITodoTaskService
     {
-        void AddTask(TodoTaskViewModel todoTaskVm);
+        Task AddTaskAsync(TodoTaskViewModel todoTaskVm);
 
-        void UpdateTask(TodoTask task);
+        Task UpdateTaskAsync(TodoTaskViewModel todoTaskViewModel);
 
-        void RemoveTask(string taskId);
+        Task RemoveTaskByIdAsync(string taskId);
     }
 }

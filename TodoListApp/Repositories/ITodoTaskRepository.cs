@@ -8,16 +8,16 @@ namespace TodoListApp.Repositories
 {
     public interface ITodoTaskRepository
     {
-        IEnumerable<TodoTask> GetTaskList(string taskListId);
+        IEnumerable<TodoTask> GetTaskListById(string taskListId);
 
-        TodoTask GetTask(string taskId);
+        TodoTask GetTaskById(string taskId);
 
         void AddTask(TodoTask task);
 
         void UpdateTask(TodoTask task);
 
-        void RemoveTask(TodoTask task);
+        void RemoveTaskById(string taskId);
 
-        void Save();
+        Task SaveAsync();
     }
 }

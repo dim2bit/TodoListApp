@@ -42,8 +42,13 @@ namespace TodoListApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            // repositories DI
             services.AddTransient<ITodoTaskRepository, TodoTaskRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+
+            // services DI
             services.AddTransient<ITodoTaskService, TodoTaskService>();
+            services.AddTransient<ICategoryService, CategoryService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

@@ -5,18 +5,19 @@ using System.Threading.Tasks;
 
 namespace TodoListApp.Exceptions
 {
-    public class InvalidNewTaskException : Exception
+    public class CategoryNotExistsException : Exception
     {
-        public InvalidNewTaskException()
+        public CategoryNotExistsException()
+            : base()
         {
         }
 
-        public InvalidNewTaskException(string message)
+        public CategoryNotExistsException(string message)
             : base(message)
         {
         }
 
-        public InvalidNewTaskException(string message, Exception innerException)
+        public CategoryNotExistsException(string message, Exception innerException)
             : base(message, innerException)
         {
         }

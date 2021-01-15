@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using TodoListApp.Models;
 using TodoListApp.Data;
 
@@ -16,17 +17,14 @@ namespace TodoListApp.Repositories
             _context = context;
         }
 
-        public IEnumerable<TodoTask> GetTaskList(string taskListId)
+        public IEnumerable<TodoTask> GetTaskListById(string taskListId)
         {
-            return _context.TodoLists
-                   .SingleOrDefault(list => list.TodoListId == taskListId)
-                   .TodoTasks;
+            return _context.TodoLists.Find(taskListId).TodoTasks;
         }
 
-        public TodoTask GetTask(string taskId)
+        public TodoTask GetTaskById(string taskId)
         {
-            return _context.TodoTasks
-                  .SingleOrDefault(task => task.TodoTaskId == taskId);
+            return _context.TodoTasks.Find(taskId);
         }
 
         public void AddTask(TodoTask task)
@@ -36,17 +34,18 @@ namespace TodoListApp.Repositories
 
         public void UpdateTask(TodoTask task)
         {
-            throw new NotImplementedException();
+            _context.Entry(task).State = EntityState.Modified;
         }
 
-        public void RemoveTask(TodoTask task)
+        public void RemoveTaskById(string taskId)
         {
+            var task = GetTaskById(taskId);
             _context.TodoTasks.Remove(task);
         }
 
-        public void Save()
+        public async Task SaveAsync()
         {
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

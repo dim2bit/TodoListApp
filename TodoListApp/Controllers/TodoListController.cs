@@ -22,23 +22,26 @@ namespace TodoListApp.Controllers
             return View();
         }
 
-        [HttpPost("/tasks/add")]
-        public RedirectToActionResult AddTask(TodoTaskViewModel todoTaskVm)
+        [HttpPost]
+        public async Task<RedirectToActionResult> AddTaskAsync(TodoTaskViewModel todoTaskVm)
         {
-            _todoTaskService.AddTask(todoTaskVm);
+            await _todoTaskService.AddTaskAsync(todoTaskVm);
 
             return RedirectToAction("Index");
         }
 
-        public RedirectToActionResult UpdateTask()
+        [HttpPost]
+        public async Task<RedirectToActionResult> UpdateTaskAsync(TodoTaskViewModel todoTaskVm)
         {
+            await _todoTaskService.UpdateTaskAsync(todoTaskVm);
+
             return RedirectToAction("Index");
         }
 
         [HttpGet("/tasks/remove/{taskId}")]
-        public RedirectToActionResult RemoveTask(string taskId)
+        public async Task<RedirectToActionResult> RemoveTaskByIdAsync(string taskId)
         {
-            _todoTaskService.RemoveTask(taskId);
+            await _todoTaskService.RemoveTaskByIdAsync(taskId);
 
             return RedirectToAction("Index");
         }
